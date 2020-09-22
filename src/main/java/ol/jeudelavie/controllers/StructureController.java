@@ -43,6 +43,14 @@ public class StructureController {
 		return structureService.save(structure);
 	}
 	
+	@PostMapping("/addListeStructure")
+	public List<Structure> addListeStructure(@RequestBody List<Structure> listeStructure){
+		for (Structure structure : listeStructure) {
+			structureService.save(structure);
+		}
+		return listeStructure;
+	}
+	
 	@PostMapping("/new")
 	public Structure getCalculJeuDeLaVieIndex(@RequestBody Structure structure){
 		
