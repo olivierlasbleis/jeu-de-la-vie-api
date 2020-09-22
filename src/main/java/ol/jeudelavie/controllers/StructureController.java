@@ -32,6 +32,17 @@ public class StructureController {
 		return structureService.getAllTypeStructure();
 	}
 	
+	@GetMapping("/all")
+	public List<Structure> getAll() {
+		return structureService.getAllStructure();
+	}
+	
+	@PostMapping("/addStructure")
+	public Structure addStructure(@RequestBody Structure structure){
+		
+		return structureService.save(structure);
+	}
+	
 	@PostMapping("/new")
 	public Structure getCalculJeuDeLaVieIndex(@RequestBody Structure structure){
 		

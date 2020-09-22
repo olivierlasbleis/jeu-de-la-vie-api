@@ -62,8 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/h2-console/**").permitAll();
 		http.headers().frameOptions().disable();
 
-		http.authorizeRequests().antMatchers(HttpMethod.GET).permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.POST).permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.POST, "/**").permitAll();
 		http.cors();
 		
 	}

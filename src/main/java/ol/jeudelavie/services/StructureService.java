@@ -53,4 +53,14 @@ public class StructureService {
 		}
 		return true;
 	}
+
+	public List<Structure> getAllStructure() {
+		// TODO Auto-generated method stub
+		return structureRepository.findAll();
+	}
+
+	public Structure save(Structure structure) {
+		// TODO Auto-generated method stub
+		return structureRepository.save(structure);
+	}
 }
