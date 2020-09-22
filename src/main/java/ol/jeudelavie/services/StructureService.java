@@ -1,6 +1,10 @@
 package ol.jeudelavie.services;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ol.jeudelavie.entities.IndexCase;
 import ol.jeudelavie.entities.structures.Structure;
 import ol.jeudelavie.repositories.StructureRepository;
+import one.util.streamex.StreamEx;
 
 @Service
 public class StructureService {
@@ -17,9 +22,21 @@ public class StructureService {
 	StructureRepository structureRepository;
 	
 	public List<Structure> getAllByTypeStructure(String typeStructure){
+		List<Structure> liste = structureRepository.findByTypeStructureAndMaxVotes(typeStructure).stream()
+				.filter(distinctByKey(p -> p.getNom())) 
+				  .collect(Collectors.toList());
 		
-		return structureRepository.findByTypeStructureAndMaxVotes(typeStructure);
+		return liste;
 	}
+	
+	public static <T> Predicate<T> distinctByKey(
+		    Function<? super T, ?> keyExtractor) {
+		  
+		    Map<Object, Boolean> seen = new ConcurrentHashMap<>(); 
+		    return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null; 
+		}
+	
+	
 
 	public List<String> getAllTypeStructure() {
 		// TODO Auto-generated method stub

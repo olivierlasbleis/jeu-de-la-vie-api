@@ -27,6 +27,17 @@ public class Structure {
 	public void ajouterUnVote() {
 		this.nbVotes = this.nbVotes + 1;
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this.getNom().equals(((Structure)o).getNom())) {
+        	return true;
+        }else {
+        	return false;
+        }
+        
+    }
+	
 	public String getNom() {
 		return nom;
 	}
