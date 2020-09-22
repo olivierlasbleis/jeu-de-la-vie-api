@@ -20,7 +20,8 @@ public interface StructureRepository extends JpaRepository<Structure, Integer>{
 			"        ON m.NOM= b.NOM-- match \"max\" row with \"bigger\" row by `home`\r\n" + 
 			"        AND m.NB_VOTES< b.NB_VOTES-- want \"bigger\" than \"max\"\r\n" + 
 			"WHERE b.NB_VOTES IS NULL  -- keep only if there is no bigger than max\r\n" + 
-			"AND m.TYPE_STRUCTURE= :typeStructure ", 
+			"AND m.TYPE_STRUCTURE= :typeStructure "
+			+ "ORDER BY m.NOM", 
 	  nativeQuery = true)
 	List<Structure> findByTypeStructureAndMaxVotes(@Param("typeStructure") String typeStructure);
 	
