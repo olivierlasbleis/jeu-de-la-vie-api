@@ -56,9 +56,11 @@ public class StructureService {
 				structure.ajouterUnVote();
 			}else {
 				structure.setId(null);
+				structure.setNbVotes(1);
 			}
 		}
 		return structureRepository.save(structure);
+		
 	}
 	
 	public boolean isSameListeIndexCase(List<IndexCase> listeA, List<IndexCase> listeB) {
