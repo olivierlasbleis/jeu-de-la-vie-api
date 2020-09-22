@@ -22,6 +22,8 @@ public class JeuService {
 	@Autowired
 	Environment env;
 	
+	@Autowired
+	AllService allService;
 	
 	public String[] getListStructures(){
 		return env.getProperty("structures.stable").split(",");

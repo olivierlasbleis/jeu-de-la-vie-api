@@ -21,20 +21,19 @@ public class StructureService {
 	@Autowired
 	StructureRepository structureRepository;
 	
+	@Autowired
+	AllService allService;
+	
+	
 	public List<Structure> getAllByTypeStructure(String typeStructure){
 		List<Structure> liste = structureRepository.findByTypeStructureAndMaxVotes(typeStructure).stream()
-				.filter(distinctByKey(p -> p.getNom())) 
+				.filter(allService.distinctByKey(p -> p.getNom())) 
 				  .collect(Collectors.toList());
 		
 		return liste;
 	}
 	
-	public static <T> Predicate<T> distinctByKey(
-		    Function<? super T, ?> keyExtractor) {
-		  
-		    Map<Object, Boolean> seen = new ConcurrentHashMap<>(); 
-		    return t -> seen.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null; 
-		}
+	
 	
 	
 

@@ -13,6 +13,15 @@ public class IndexCase {
 	private Integer id;
 	private int i;
 	private int j;
+	
+	@Override
+    public boolean equals(Object o) { 
+		if (this.i == ((IndexCase)o).getI() && this.j == ((IndexCase)o).getJ()) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	public IndexCase(int i, int j) {
 		this.i=i;
