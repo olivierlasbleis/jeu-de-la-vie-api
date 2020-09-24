@@ -15,6 +15,11 @@ public class IndexCase {
 	private int j;
 	
 	@Override
+	public int hashCode() {
+	    return (i * 31) ^ j;
+	  }
+	
+	@Override
     public boolean equals(Object o) { 
 		if (this.i == ((IndexCase)o).getI() && this.j == ((IndexCase)o).getJ()) {
 			return true;

@@ -1,6 +1,10 @@
 package ol.jeudelavie.controllers;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +44,10 @@ public class JeuController {
 	
 	@PostMapping("/index")
 	public List<IndexCase> getCalculJeuDeLaVieIndex(@RequestBody TableauPost situationInitiale){
-		
+		Set set = new HashSet();
+		set.addAll(situationInitiale.getListeIndex());
+		List<IndexCase> listeIndexSansDoublons= new ArrayList(set);
+		situationInitiale.setListeIndex(listeIndexSansDoublons);
 		List<IndexCase> listeIndexCasesRetour = jeuService.calculJeuDeLaVieIndex(situationInitiale);
 		if(!listeIndexCasesRetour.equals(situationInitiale.getListeIndex())){
 			return listeIndexCasesRetour;
